@@ -4,6 +4,8 @@ const iconElement = document.querySelector(".weather-icon")
 const tempElement = document.querySelector(".temperature-value p")
 const descElement = document.querySelector(".temperature-description p")
 const locationElement = document.querySelector(".location p")
+const humidityElement = document.querySelector(".humidity p")
+
 //App Data
 const weather = {
     temperature: {
@@ -13,7 +15,8 @@ const weather = {
     description: "",
     iconId: "01d",
     city: "",
-    country: ""
+    country: "",
+    humidity: ""
 };
 // const var for app
 const KELVIN = 273
@@ -35,6 +38,7 @@ function displayWeather() {
     tempElement.innerHTML = `${weather.temperature.value} °<span>C</span>`;
     descElement.innerHTML = weather.description;
     locationElement.innerHTML = `${weather.city}, ${weather.country}`;
+    humidityElement.innerHTML = `Humidity: ${weather.humidity}%`
 }
 
 // convert
@@ -79,6 +83,7 @@ function getWeather(latitude, longitude) {
             weather.iconId = data.weather[0].icon
             weather.city = data.name
             weather.country = data.sys.country
+            weather.humidity = data.main.humidity
             console.log(weather.temperature.value, weather.iconId, weather.description, weather.city, weather.country)
         })
         .then(function () {
